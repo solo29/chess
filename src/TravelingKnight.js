@@ -24,7 +24,7 @@ const _get = (board, x, y) => {
 };
 
 const TravelingKnight = ({ x, y, size }) => {
-  const [pos, setPos] = useState({ x, y });
+  const [pos, setPos] = useState({ x: +x, y: +y });
 
   const [visitables, setVisitables] = useState([]);
   const [visited, setVisited] = useState({});

@@ -7,8 +7,8 @@ import TravelingKnight from "./TravelingKnight";
 function App() {
   const [started, setStarted] = useStatex(false);
   const [size, setSize, sizeBind] = useStatex(8);
-  const [x, setX, xBind] = useStatex(2);
-  const [y, setY, yBind] = useStatex(2);
+  const [x, setX, xBind] = useStatex(3);
+  const [y, setY, yBind] = useStatex(3);
 
   return (
     <div className="App">
