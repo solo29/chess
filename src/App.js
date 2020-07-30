@@ -1,23 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+/* eslint-disable no-unused-vars */
+import React from "react";
+import { useStatex } from "./hooks";
+import "./App.scss";
+import knight from "./knight.svg";
+import TravelingKnight from "./TravelingKnight";
 function App() {
+  const [started, setStarted] = useStatex(false);
+  const [size, setSize, sizeBind] = useStatex(8);
+  const [x, setX, xBind] = useStatex(2);
+  const [y, setY, yBind] = useStatex(2);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img src={knight} className="App-logo" alt="logo" />
+        {!started ? (
+          <div>
+            <p>Board Size</p>
+            <input min={6} value={size} onChange={sizeBind} type="number" />
+            <p>x coordinate</p>
+            <input min={0} value={x} onChange={xBind} type="number" />
+            <p>y coordinate</p>
+            <input min={0} value={y} onChange={yBind} type="number" />
+            <br></br>
+            <button onClick={() => setStarted(true)}>Start</button>
+          </div>
+        ) : (
+          <TravelingKnight size={size} x={x} y={y} />
+        )}
       </header>
     </div>
   );
