@@ -18,9 +18,9 @@ function App() {
           <div>
             <p>Board Size</p>
             <input min={6} value={size} onChange={sizeBind} type="number" />
-            <p>x coordinate</p>
+            <p>X coordinate</p>
             <input min={0} value={x} onChange={xBind} type="number" />
-            <p>y coordinate</p>
+            <p>Y coordinate</p>
             <input min={0} value={y} onChange={yBind} type="number" />
             <br></br>
             <button onClick={() => setStarted(true)}>Start</button>
