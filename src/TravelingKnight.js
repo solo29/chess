@@ -30,7 +30,20 @@ const TravelingKnight = ({ x, y, size }) => {
   const [visited, setVisited] = useState({});
   const [board, setBoard] = useState(generateBoard(size, visited));
   const [count, setCount] = useState(0);
+  const [auto, setAuto] = useState(false);
 
+  useEffect(() => {
+    let timer = null;
+
+    if (auto && visitables.length > 0) {
+      const randomIndex = Math.floor(Math.random() * visitables.length);
+      timer = setTimeout(() => {
+        move(visitables[randomIndex]);
+      }, 200);
+    }
+
+    return () => clearTimeout(timer);
+  });
   useEffect(() => {
     checkAndMarkMoves();
   }, [pos]);
@@ -46,14 +59,6 @@ const TravelingKnight = ({ x, y, size }) => {
 
   const isVisited = (x, y) => {
     return visited[`${x}_${y}`];
-  };
-  const enableAutopilot = () => {
-    if (visitables.length > 0) {
-      const randomIndex = Math.floor(Math.random() * visitables.length);
-      move(visitables[randomIndex]);
-    } else {
-      alert("Oops No more moves :(");
-    }
   };
 
   const checkAndMarkMoves = () => {
@@ -140,8 +145,9 @@ const TravelingKnight = ({ x, y, size }) => {
     <div>
       <p>Click on green tiles to move</p>
       {buildBoard()}
+      {!visitables.length && <p>Oops no more moves :(</p>}
       <div>Moves: {count}</div>
-      <button onClick={() => enableAutopilot()}>Autopilot</button>
+      <button onClick={() => setAuto(!auto)}>Autopilot</button>
     </div>
   );
 };
